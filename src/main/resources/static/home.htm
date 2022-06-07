@@ -1,0 +1,252 @@
+<html>
+<head>
+    <title>This is title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div id="root">
+
+</div>
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+<script type="text/babel">
+    const {useState,useEffect}=React
+
+    function Main(){
+        const [royal,setRoyal]=useState(false);
+        const [ups,setUps]=useState(false);
+        const [evri,setEvri]=useState(false);
+        const [valid,setValid]=useState(false);
+        useEffect(()=>{
+            if(window.sessionStorage.getItem("id")!=null &&
+                window.sessionStorage.getItem("invoiceNo")!=null && window.sessionStorage.getItem("isActive")!=null){
+                setValid(true);
+            }else{
+                setValid(false);
+                // window.location.href="/index.htm";
+            }
+        },[]);
+        const handleRoyal=()=>{
+            setRoyal(~royal);
+            setUps(false);
+            setEvri(false);
+        }
+
+        const handleUps=()=>{
+            setRoyal(false);
+            setUps(~ups);
+            setEvri(false);
+        }
+
+        const handleEvri=()=>{
+            setRoyal(false);
+            setUps(false);
+            setEvri(~evri);
+        }
+        if(valid){
+            return(
+                <div className="container">
+                    <div className="row">
+                        <div className="card mx-auto" style={{width: '18rem'}}>
+                            <img src="/images/Royal_Mail.svg" className="card-img-top" alt="Royal Mail" width="300" height="300"/>
+                            <div className="card-body mx-auto">
+                                <a className="btn btn-warning"  data-toggle="modal" data-target="#myModal" onClick={handleRoyal}>Generate Invoice </a>
+                            </div>
+                        </div>
+
+                        <div className="card mx-auto" style={{width: '18rem'}}>
+                            <img src="/images/ups.svg" class="card-img-top" alt="UPS" width="300" height="300"/>
+                            <div className="card-body mx-auto">
+                                <a className="btn btn-warning"  data-toggle="modal" data-target="#myModal" onClick={handleUps}>Generate Invoice </a>
+                            </div>
+                        </div>
+
+                        <div className="card mx-auto" style={{width: '18rem'}}>
+                            <img src="/images/Evri.webp" class="card-img-top" alt="UPS" width="300" height="300"/>
+                            <div className="card-body mx-auto">
+                                <a className="btn btn-warning"  data-toggle="modal" data-target="#myModal" onClick={handleRoyal}>Generate Invoice </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="modal" id="myModal">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title">{royal && "Royal Mail"
+                                        || ups && "UPS" || evri && "Evri"
+                                    }</h5>
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                {royal &&
+                                    <div className="modal-body">
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <label><strong>Enter Date</strong></label>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <input type="date"/>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <label><strong>Enter Address</strong></label>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <input type="text"/>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <label><strong>Enter Weight (in grams)</strong></label>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <input type="text"/>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <label><strong>Enter Building Name</strong></label>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <input type="text"/>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <label><strong>Enter Postcode Destination</strong></label>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <input type="text"/>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <label><strong>Enter Barcode Number</strong></label>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <input type="text"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                {evri &&
+                                    <div className="modal-body">
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <label><strong>Enter Barcode Number</strong></label>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <input type="text"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                {ups &&
+                                    <div className="modal-body">
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <label><strong>Enter Drop off Location</strong></label>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <input type="text"/>
+                                            </div>
+                                        </div>
+
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <label><strong>Enter Tracking No. </strong></label>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <input type="text"/>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <label><strong>Enter Date</strong></label>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <input type="date"/>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" className="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            );
+        }else{
+            return (
+                <div className="container"><h1>Invalid Login</h1></div>
+            );
+        }
+
+    }
+
+    const domContainer = document.getElementById("root");
+    const root = ReactDOM.createRoot(domContainer);
+    root.render(<Main/>);
+
+</script>
+</body>
+
+</html>

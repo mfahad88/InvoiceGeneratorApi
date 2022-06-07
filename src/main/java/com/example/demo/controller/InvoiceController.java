@@ -41,7 +41,7 @@ public class InvoiceController {
 	
 	@CrossOrigin(origins = "*")
 	@GetMapping("invoice/{invoice_no}")
-	public Invoice getInvoice(@PathVariable("no")String invoice_no) {
+	public Invoice getInvoice(@PathVariable("invoice_no")String invoice_no) {
 		return this.service.getByInvoiceNo(invoice_no);
 	}
 	
